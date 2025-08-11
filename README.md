@@ -9,7 +9,7 @@ A Node.js automation script that connects to WhatsApp Web using the Baileys libr
 - **🎯 Smart Group Management**: Automatically manages source and target groups
 - **🔍 Visual Content Search**: Finds relevant videos, articles, and images
 - **📺 Multi-format Content**: Supports text scripts and visual media suggestions
-- **🎨 Graphic Designer Integration**: Auto-generates headlines and summaries for Abdullah Khan Vision Point Graphic Designer
+- **🎨 Graphic Designer Integration**: Auto-generates headlines and summaries for Abdullah Khan Vision Point Graphic Designer (individual contact)
 - **⚡ Real-time Processing**: Instant script generation and distribution
 - **🛡️ Error Handling**: Robust error management and logging
 - **🔄 Auto-reconnection**: Maintains stable WhatsApp connection
@@ -95,7 +95,7 @@ Once connected, you should see:
 4. **📝 Script Creation**: Generates professional Urdu news script
 5. **📤 Distribution**: Sends the script to target group
 6. **🎨 Summary Generation**: Creates headline and summary for graphic designer
-7. **👨‍🎨 Designer Notification**: Sends summary to Abdullah Khan Vision Point Graphic Designer
+7. **👨‍🎨 Designer Notification**: Sends summary to Abdullah Khan Vision Point Graphic Designer (individual contact)
 8. **🔍 Visual Search**: Finds related videos, articles, and images
 9. **📺 Content Sharing**: Shares visual content suggestions
 10. **✅ Confirmation**: Reacts to original message with checkmark

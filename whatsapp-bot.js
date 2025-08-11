@@ -399,47 +399,59 @@ class WhatsAppBot {
     }
 
     /**
-     * Send summary and headline to graphic designer
+     * Send summary and headline to graphic designer (Individual Contact)
+     * Searches for "Abdullah Khan Vision Point Graphic Designer" as a SINGLE PERSON, not a group
      */
     async sendSummaryToGraphicDesigner(summaryAndHeadline) {
         try {
-            console.log('🎨 Sending summary and headline to graphic designer...');
+            console.log('🎨 Sending summary and headline to graphic designer (individual contact)...');
             
-            // Find Abdullah Khan Vision Point Graphic Designer contact
+            // Find Abdullah Khan Vision Point Graphic Designer INDIVIDUAL CONTACT
             const contacts = await this.sock.getContacts();
             let designerJid = null;
+            let foundContactName = '';
             
-            // Search for the contact by name
+            console.log('🔍 Searching for Abdullah Khan Vision Point Graphic Designer in individual contacts...');
+            
+            // Search for the INDIVIDUAL CONTACT by name (not group)
             for (const [jid, contact] of Object.entries(contacts)) {
-                const name = contact.name || contact.notify || '';
-                if (name.toLowerCase().includes('abdullah khan') && 
-                    (name.toLowerCase().includes('vision point') || name.toLowerCase().includes('graphic designer'))) {
+                // Skip group JIDs (groups end with @g.us, individual contacts end with @s.whatsapp.net)
+                if (jid.includes('@g.us')) {
+                    continue; // Skip groups, we only want individual contacts
+                }
+                
+                const name = contact.name || contact.notify || contact.verifiedName || '';
+                const searchName = name.toLowerCase();
+                
+                // Enhanced search for Abdullah Khan Vision Point Graphic Designer
+                if ((searchName.includes('abdullah') && searchName.includes('khan')) || 
+                    (searchName.includes('vision point') && searchName.includes('graphic')) ||
+                    (searchName.includes('abdullah') && searchName.includes('vision')) ||
+                    (searchName.includes('abdullah') && searchName.includes('designer'))) {
                     designerJid = jid;
+                    foundContactName = name;
+                    console.log(`✅ Found graphic designer contact: "${foundContactName}" (${jid})`);
                     break;
                 }
             }
             
-            // If not found by name, try to find in saved contacts
-            if (!designerJid) {
-                console.log('🔍 Searching for Abdullah Khan Vision Point Graphic Designer in contacts...');
-                // You can add the specific JID here if known
-                // designerJid = 'specific_jid@s.whatsapp.net';
-            }
-            
             if (designerJid) {
+                // Send to INDIVIDUAL CONTACT
                 await this.sock.sendMessage(designerJid, {
-                    text: `🎨 *Vision Point - Script Summary & Headline* 🎨\n\n${summaryAndHeadline}\n\n---\n🤖 *Auto-generated for Graphic Design*`
+                    text: `🎨 *Vision Point - Script Summary & Headline* 🎨\n\n${summaryAndHeadline}\n\n---\n🤖 *Auto-generated for Graphic Design*\n📱 *Sent to: ${foundContactName}*`
                 });
-                console.log('✅ Summary and headline sent to graphic designer successfully!');
+                console.log(`✅ Summary and headline sent to graphic designer "${foundContactName}" successfully!`);
             } else {
-                console.log('⚠️ Abdullah Khan Vision Point Graphic Designer contact not found');
+                console.log('⚠️ Abdullah Khan Vision Point Graphic Designer INDIVIDUAL CONTACT not found');
+                console.log('💡 Make sure "Abdullah Khan Vision Point Graphic Designer" is saved as an individual contact (not in a group)');
+                
                 // Fallback: send to visual target group with mention
                 const visualTargetGroupJid = this.groupJids.get(CONFIG.VISUAL_TARGET_GROUP);
                 if (visualTargetGroupJid) {
                     await this.sock.sendMessage(visualTargetGroupJid, {
-                        text: `🎨 *For Abdullah Khan Vision Point Graphic Designer* 🎨\n\n${summaryAndHeadline}\n\n---\n🤖 *Auto-generated Script Summary & Headline*`
+                        text: `🎨 *For Abdullah Khan Vision Point Graphic Designer* 🎨\n\n${summaryAndHeadline}\n\n---\n🤖 *Auto-generated Script Summary & Headline*\n⚠️ *Note: Individual contact not found, sent to group as fallback*`
                     });
-                    console.log('✅ Summary sent to visual target group as fallback');
+                    console.log('✅ Summary sent to visual target group as fallback (individual contact not found)');
                 }
             }
         } catch (error) {
