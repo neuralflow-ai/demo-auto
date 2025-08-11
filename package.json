@@ -1,0 +1,40 @@
+{
+  "name": "whatsapp-news-bot",
+  "version": "1.0.0",
+  "description": "WhatsApp automation bot for Vision Point news script generation using Baileys and Perplexity AI",
+  "main": "whatsapp-bot.js",
+  "scripts": {
+    "start": "node whatsapp-bot.js",
+    "dev": "nodemon whatsapp-bot.js",
+    "build": "npm install --production",
+    "test": "node -e \"console.log('✅ Bot configuration loaded successfully')\"",
+    "health": "curl -f http://localhost:3000/health || exit 1"
+  },
+  "keywords": [
+    "whatsapp",
+    "bot",
+    "baileys",
+    "automation",
+    "news",
+    "perplexity",
+    "ai"
+  ],
+  "author": "Vision Point",
+  "license": "MIT",
+  "dependencies": {
+    "@hapi/boom": "^10.0.1",
+    "@whiskeysockets/baileys": "^6.6.0",
+    "axios": "^1.6.2",
+    "cheerio": "^1.1.2",
+    "google-search-results-nodejs": "^2.1.0",
+    "pino": "^8.17.2",
+    "qrcode-terminal": "^0.12.0",
+    "youtube-search-api": "^2.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

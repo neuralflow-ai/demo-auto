@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: whatsapp-news-bot
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PERPLEXITY_API_KEY
+        sync: false  # This will need to be set manually in Render dashboard
+    healthCheckPath: /health
+    autoDeploy: true
+    branch: main
