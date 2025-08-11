@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: whatsapp-news-bot-static
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm run start:web
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: PERPLEXITY_API_KEY
+        value: your_perplexity_api_key_here
+    autoDeploy: true
+    branch: main
+    healthCheckPath: /health
+    disk:
+      name: static-disk
+      mountPath: /opt/render/project/src/public
+      sizeGB: 1

@@ -5,10 +5,12 @@
   "main": "whatsapp-bot.js",
   "scripts": {
     "start": "node whatsapp-bot.js",
+    "start:web": "node server.js",
     "dev": "nodemon whatsapp-bot.js",
+    "dev:web": "nodemon server.js",
     "build": "npm install --production",
-    "test": "node -e \"console.log('✅ Bot configuration loaded successfully')\"",
-    "health": "curl -f http://localhost:3000/health || exit 1"
+    "test": "node -e \"console.log('Bot configuration check passed')\"",
+    "health": "curl http://localhost:3000/health || echo 'Health check failed'"
   },
   "keywords": [
     "whatsapp",

@@ -46,6 +46,14 @@ git push -u origin main
 
 ## 🌐 Render Deployment
 
+You have two deployment options:
+
+### Option A: WhatsApp Bot Service (Recommended)
+For running the actual WhatsApp bot with full functionality.
+
+### Option B: Static Web Interface
+For a simple web dashboard (useful for testing or as a landing page).
+
 ### 1. Connect GitHub to Render
 
 1. Go to [Render Dashboard](https://dashboard.render.com/)
@@ -55,6 +63,7 @@ git push -u origin main
 
 ### 2. Configure Deployment Settings
 
+#### For WhatsApp Bot Service (Option A):
 **Basic Settings:**
 - **Name**: `whatsapp-news-bot`
 - **Environment**: `Node`
@@ -65,6 +74,19 @@ git push -u origin main
 
 **Advanced Settings:**
 - **Plan**: Free (for testing) or Starter (for production)
+- **Node Version**: `18` (specified in package.json)
+
+#### For Static Web Interface (Option B):
+**Basic Settings:**
+- **Name**: `whatsapp-news-bot-static`
+- **Environment**: `Node`
+- **Region**: Choose closest to your location
+- **Branch**: `main`
+- **Build Command**: `npm install`
+- **Start Command**: `npm run start:web`
+
+**Advanced Settings:**
+- **Plan**: Free
 - **Node Version**: `18` (specified in package.json)
 
 ### 3. Environment Variables
