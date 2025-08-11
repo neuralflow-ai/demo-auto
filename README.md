@@ -2,15 +2,17 @@
 
 A Node.js automation script that connects to WhatsApp Web using the Baileys library and integrates with Perplexity AI to generate Urdu news scripts.
 
-## Features
+## 🌟 Key Features
 
-- 🤖 **Automated WhatsApp Integration**: Connects to WhatsApp Web using Baileys
-- 📱 **Session Persistence**: Saves login session to avoid repeated QR scanning
-- 🎯 **Group Monitoring**: Listens to messages in "VPCONTENT" group
-- 🤖 **AI-Powered Script Generation**: Uses Perplexity AI to generate professional Urdu news scripts
-- 📤 **Automated Distribution**: Sends generated scripts to "VP researcher group"
-- ✅ **Message Reactions**: Reacts to processed messages with checkmark emoji
-- 🔄 **Loop Prevention**: Ignores bot's own messages
+- **🤖 AI-Powered Script Generation**: Uses Perplexity AI to create engaging Urdu news scripts
+- **📱 WhatsApp Integration**: Seamlessly connects with WhatsApp using Baileys library
+- **🎯 Smart Group Management**: Automatically manages source and target groups
+- **🔍 Visual Content Search**: Finds relevant videos, articles, and images
+- **📺 Multi-format Content**: Supports text scripts and visual media suggestions
+- **🎨 Graphic Designer Integration**: Auto-generates headlines and summaries for Abdullah Khan Vision Point Graphic Designer
+- **⚡ Real-time Processing**: Instant script generation and distribution
+- **🛡️ Error Handling**: Robust error management and logging
+- **🔄 Auto-reconnection**: Maintains stable WhatsApp connection
 
 ## Requirements
 
@@ -85,15 +87,18 @@ Once connected, you should see:
 🎉 Bot is now running! Press Ctrl+C to stop.
 ```
 
-## How It Works
+## 🔄 How It Works
 
-1. **Message Detection**: Bot monitors all messages in "VPCONTENT" group
-2. **Content Processing**: When a non-empty text message arrives:
-   - Extracts the message text
-   - Sends it to Perplexity AI with a professional Urdu news script prompt
-3. **Script Generation**: Perplexity AI generates a 9-minute Urdu news script
-4. **Distribution**: Bot sends the generated script to "VP researcher group"
-5. **Confirmation**: Reacts to the original message with ✅ emoji
+1. **📱 WhatsApp Connection**: Bot connects to WhatsApp Web and saves session
+2. **👂 Message Monitoring**: Listens for new messages in the source group
+3. **🤖 AI Processing**: Sends message content to Perplexity AI for script generation
+4. **📝 Script Creation**: Generates professional Urdu news script
+5. **📤 Distribution**: Sends the script to target group
+6. **🎨 Summary Generation**: Creates headline and summary for graphic designer
+7. **👨‍🎨 Designer Notification**: Sends summary to Abdullah Khan Vision Point Graphic Designer
+8. **🔍 Visual Search**: Finds related videos, articles, and images
+9. **📺 Content Sharing**: Shares visual content suggestions
+10. **✅ Confirmation**: Reacts to original message with checkmark
 
 ## Configuration
 

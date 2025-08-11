@@ -46,6 +46,36 @@ IMPORTANT STYLE REQUIREMENTS:
 
 Write the complete ready-to-speech news script in Urdu:`;
 
+// Summary and headline generation prompt for graphic designer
+const SUMMARY_HEADLINE_PROMPT = `تم ایک اردو میڈیا ٹیم کے اسکرپٹ رائٹر ہو جس کا انداز بےباک، طنزیہ، افشاگر، اور حب الوطنی پر مبنی ہوتا ہے — جیسا کہ "ویژن پوائنٹ" (Vision Point) جیسے چینلز یا صفحات کا ہوتا ہے۔
+
+تمہیں ایک اردو نیوز اسکرپٹ دیا گیا ہے۔ تمہارا کام ہے کہ اس اسکرپٹ کو:
+
+1. ایک طاقتور، ڈرامائی، دو معنوں والا اردو **عنوان** دو — جیسے:
+   - "اب کی بار… ٹرمپ کا تھپڑ!"
+   - "مودی کا وِسرائے، کشمیر پر قابض!"
+   - "پہلگام حملہ: بھارت کا پروپیگنڈا بےنقاب!"
+
+2. ایک **تین لائن** کی اردو ڈسکرپشن لکھو جو:
+   - مؤثر، شارپ اور طنزیہ ہو
+   - پاکستان کے مؤقف کو تقویت دے
+   - بھارت کی ناکامی یا تضاد کو نمایاں کرے
+   - قاری کو چونکا دے اور معلوماتی ہو
+
+**لہجہ**: بےباک، نیشنل نیریٹو کو سپورٹ کرنے والا، ثبوت پر مبنی طنز، اور عالمی تناظر میں تقابلی
+
+**فارمیٹ**:
+
+🔴 [پاورفل اردو ٹائٹل]
+
+ڈسکرپشن:
+[تین لائن کی دھماکہ خیز، مدلل اور طنزیہ وضاحت]
+
+یہ رہا اسکرپٹ:
+{news_script}
+
+اب اس کا عنوان اور خلاصہ بناؤ:`;
+
 class WhatsAppBot {
     constructor() {
         this.sock = null;
@@ -296,6 +326,48 @@ class WhatsAppBot {
     }
 
     /**
+     * Generate summary and headline using Perplexity API
+     */
+    async generateSummaryAndHeadline(newsScript) {
+        try {
+            console.log('🤖 Generating summary and headline with Perplexity AI...');
+
+            const prompt = SUMMARY_HEADLINE_PROMPT.replace('{news_script}', newsScript);
+
+            const response = await axios.post(CONFIG.PERPLEXITY_API_URL, {
+                model: 'sonar-pro',
+                messages: [
+                    {
+                        role: 'user',
+                        content: prompt
+                    }
+                ],
+                temperature: 0.8,
+                max_tokens: 500
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${CONFIG.PERPLEXITY_API_KEY}`,
+                    'Content-Type': 'application/json'
+                },
+                timeout: 30000 // 30 seconds timeout
+            });
+
+            if (response.data && response.data.choices && response.data.choices[0]) {
+                const summaryAndHeadline = response.data.choices[0].message.content;
+                console.log('✅ Summary and headline generated successfully!');
+                return summaryAndHeadline;
+            } else {
+                console.error('❌ Invalid response from Perplexity API for summary');
+                return null;
+            }
+
+        } catch (error) {
+            console.error('❌ Error generating summary and headline:', error.response?.data || error.message);
+            return null;
+        }
+    }
+
+    /**
      * Send generated script to target group
      */
     async sendScriptToTargetGroup(newsScript) {
@@ -315,8 +387,63 @@ class WhatsAppBot {
 
             console.log('✅ Script sent successfully!');
 
+            // Generate and send summary and headline to graphic designer
+            const summaryAndHeadline = await this.generateSummaryAndHeadline(newsScript);
+            if (summaryAndHeadline) {
+                await this.sendSummaryToGraphicDesigner(summaryAndHeadline);
+            }
+
         } catch (error) {
             console.error('❌ Error sending script to target group:', error);
+        }
+    }
+
+    /**
+     * Send summary and headline to graphic designer
+     */
+    async sendSummaryToGraphicDesigner(summaryAndHeadline) {
+        try {
+            console.log('🎨 Sending summary and headline to graphic designer...');
+            
+            // Find Abdullah Khan Vision Point Graphic Designer contact
+            const contacts = await this.sock.getContacts();
+            let designerJid = null;
+            
+            // Search for the contact by name
+            for (const [jid, contact] of Object.entries(contacts)) {
+                const name = contact.name || contact.notify || '';
+                if (name.toLowerCase().includes('abdullah khan') && 
+                    (name.toLowerCase().includes('vision point') || name.toLowerCase().includes('graphic designer'))) {
+                    designerJid = jid;
+                    break;
+                }
+            }
+            
+            // If not found by name, try to find in saved contacts
+            if (!designerJid) {
+                console.log('🔍 Searching for Abdullah Khan Vision Point Graphic Designer in contacts...');
+                // You can add the specific JID here if known
+                // designerJid = 'specific_jid@s.whatsapp.net';
+            }
+            
+            if (designerJid) {
+                await this.sock.sendMessage(designerJid, {
+                    text: `🎨 *Vision Point - Script Summary & Headline* 🎨\n\n${summaryAndHeadline}\n\n---\n🤖 *Auto-generated for Graphic Design*`
+                });
+                console.log('✅ Summary and headline sent to graphic designer successfully!');
+            } else {
+                console.log('⚠️ Abdullah Khan Vision Point Graphic Designer contact not found');
+                // Fallback: send to visual target group with mention
+                const visualTargetGroupJid = this.groupJids.get(CONFIG.VISUAL_TARGET_GROUP);
+                if (visualTargetGroupJid) {
+                    await this.sock.sendMessage(visualTargetGroupJid, {
+                        text: `🎨 *For Abdullah Khan Vision Point Graphic Designer* 🎨\n\n${summaryAndHeadline}\n\n---\n🤖 *Auto-generated Script Summary & Headline*`
+                    });
+                    console.log('✅ Summary sent to visual target group as fallback');
+                }
+            }
+        } catch (error) {
+            console.error('❌ Error sending summary to graphic designer:', error);
         }
     }
 
