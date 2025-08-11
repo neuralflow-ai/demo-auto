@@ -19,7 +19,7 @@ A Node.js automation script that connects to WhatsApp Web using the Baileys libr
 - Node.js 16.0.0 or higher
 - npm (Node Package Manager)
 - WhatsApp account
-- Access to both "VPCONTENT" and "VP researcher group" WhatsApp groups
+- Access to both "Content" and "Demo script" WhatsApp groups
 
 ## Installation
 
@@ -50,8 +50,8 @@ npm install --save-dev nodemon
 ### 1. Verify Group Names
 
 Make sure you have access to these WhatsApp groups with exact names:
-- **Source Group**: `VPCONTENT` (where bot listens for messages)
-- **Target Group**: `VP researcher group` (where bot sends generated scripts)
+- **Source Group**: `Content` (where bot listens for messages)
+- **Target Group**: `Demo script` (where bot sends generated scripts)
 
 ### 2. Run the Bot
 
@@ -81,9 +81,9 @@ node whatsapp-bot.js
 Once connected, you should see:
 ```
 ✅ WhatsApp connection opened successfully!
-📋 Found group: VPCONTENT (group_id)
-📋 Found group: VP researcher group (group_id)
-✅ Both required groups found and ready!
+📋 Found group: Content (group_id)
+📋 Found group: Demo script (group_id)
+✅ All required groups found and ready!
 🎉 Bot is now running! Press Ctrl+C to stop.
 ```
 
@@ -108,8 +108,9 @@ You can modify the configuration in `whatsapp-bot.js`:
 const CONFIG = {
     PERPLEXITY_API_KEY: 'your-api-key-here',
     PERPLEXITY_API_URL: 'https://api.perplexity.ai/chat/completions',
-    SOURCE_GROUP: 'VPCONTENT',
-    TARGET_GROUP: 'VP researcher group',
+    SOURCE_GROUP: 'Content',
+    SCRIPT_TARGET_GROUP: 'Demo script',
+    VISUAL_TARGET_GROUP: 'Demo visual',
     SESSION_DIR: './auth_info_baileys'
 };
 ```

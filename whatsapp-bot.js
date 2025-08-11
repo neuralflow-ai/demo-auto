@@ -20,8 +20,8 @@ const http = require('http');
 const CONFIG = {
     PERPLEXITY_API_KEY: process.env.PERPLEXITY_API_KEY || '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',
     PERPLEXITY_API_URL: 'https://api.perplexity.ai/chat/completions',
-    SOURCE_GROUP: process.env.SOURCE_GROUP || 'VP CONTENT',
-    SCRIPT_TARGET_GROUP: process.env.SCRIPT_TARGET_GROUP || 'VP researcher group',
+    SOURCE_GROUP: process.env.SOURCE_GROUP || 'Content',
+    SCRIPT_TARGET_GROUP: process.env.SCRIPT_TARGET_GROUP || 'Demo script',
     VISUAL_TARGET_GROUP: process.env.VISUAL_TARGET_GROUP || 'Demo visual',
     SESSION_DIR: './auth_info_baileys',
     PORT: process.env.PORT || 3000
