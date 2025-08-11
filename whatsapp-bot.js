@@ -12,6 +12,7 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 const qrcode = require('qrcode-terminal');
+const QRCode = require('qrcode');
 const youtubeSearch = require('youtube-search-api');
 const cheerio = require('cheerio');
 const http = require('http');
@@ -114,6 +115,30 @@ class WhatsAppBot {
             qrcode.generate(qr, { small: true });
             console.log('━'.repeat(50));
             console.log('📱 Open WhatsApp → Settings → Linked Devices → Link a Device → Scan QR');
+            
+            // Save QR code as image for web dashboard
+            try {
+                const qrImagePath = path.join(__dirname, 'public', 'qr-code.png');
+                await QRCode.toFile(qrImagePath, qr, {
+                    width: 400,
+                    margin: 2,
+                    color: {
+                        dark: '#000000',
+                        light: '#FFFFFF'
+                    }
+                });
+                console.log('💾 QR Code saved for web dashboard access');
+                
+                // Also save QR data for API access
+                const qrDataPath = path.join(__dirname, 'public', 'qr-data.json');
+                fs.writeFileSync(qrDataPath, JSON.stringify({
+                    qr: qr,
+                    timestamp: new Date().toISOString(),
+                    status: 'waiting_for_scan'
+                }));
+            } catch (error) {
+                console.error('❌ Failed to save QR code:', error);
+            }
         }
 
         if (connection === 'close') {
@@ -130,6 +155,23 @@ class WhatsAppBot {
         } else if (connection === 'open') {
             console.log('✅ WhatsApp connection opened successfully!');
             this.botNumber = this.sock.user.id.split(':')[0];
+            
+            // Clean up QR code files since connection is established
+            try {
+                const qrImagePath = path.join(__dirname, 'public', 'qr-code.png');
+                const qrDataPath = path.join(__dirname, 'public', 'qr-data.json');
+                
+                if (fs.existsSync(qrImagePath)) {
+                    fs.unlinkSync(qrImagePath);
+                }
+                if (fs.existsSync(qrDataPath)) {
+                    fs.unlinkSync(qrDataPath);
+                }
+                console.log('🧹 Cleaned up QR code files');
+            } catch (error) {
+                console.error('⚠️ Failed to clean QR files:', error);
+            }
+            
             await this.loadGroupJids();
         }
     }

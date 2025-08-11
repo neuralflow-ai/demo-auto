@@ -55,6 +55,35 @@ const server = http.createServer((req, res) => {
         return;
     }
 
+    // API endpoint for QR code status
+    if (url === '/api/qr-status') {
+        const qrDataPath = path.join(__dirname, 'public', 'qr-data.json');
+        const qrImagePath = path.join(__dirname, 'public', 'qr-code.png');
+        
+        if (fs.existsSync(qrDataPath) && fs.existsSync(qrImagePath)) {
+            try {
+                const qrData = JSON.parse(fs.readFileSync(qrDataPath, 'utf8'));
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({
+                    hasQR: true,
+                    qrImageUrl: '/qr-code.png',
+                    timestamp: qrData.timestamp,
+                    status: qrData.status
+                }));
+            } catch (error) {
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ hasQR: false, error: 'Failed to read QR data' }));
+            }
+        } else {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ 
+                hasQR: false, 
+                message: 'Bot is connected or QR code not generated yet' 
+            }));
+        }
+        return;
+    }
+
     // Serve static files
     const filePath = path.join(__dirname, 'public', url);
     const extname = path.extname(filePath).toLowerCase();

@@ -149,9 +149,29 @@
         <h1>WhatsApp News Bot</h1>
         <p class="subtitle">AI-Powered News Generation & Distribution</p>
         
-        <div class="status">
+        <div class="status" id="botStatus">
             <span class="status-indicator"></span>
-            <strong>Bot Status: Deployed & Ready</strong>
+            <strong>Bot Status: Checking...</strong>
+        </div>
+
+        <!-- QR Code Section -->
+        <div id="qrSection" style="display: none;">
+            <div style="background: #fff3cd; border: 2px solid #ffc107; border-radius: 10px; padding: 20px; margin: 20px 0;">
+                <h3 style="color: #856404; margin-bottom: 15px;">📱 WhatsApp Authentication Required</h3>
+                <p style="color: #856404; margin-bottom: 15px;">Scan this QR code with WhatsApp to connect the bot:</p>
+                <div style="text-align: center; margin: 20px 0;">
+                    <img id="qrImage" src="" alt="QR Code" style="max-width: 300px; border: 2px solid #ddd; border-radius: 10px;">
+                </div>
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                    <strong>Instructions:</strong>
+                    <ol style="margin: 10px 0; padding-left: 20px; color: #495057;">
+                        <li>Open WhatsApp on your phone</li>
+                        <li>Go to Settings → Linked Devices</li>
+                        <li>Tap "Link a Device"</li>
+                        <li>Scan the QR code above</li>
+                    </ol>
+                </div>
+            </div>
         </div>
 
         <div class="features">
@@ -176,6 +196,7 @@
         <div class="api-links">
             <a href="/health" class="api-link">Health Check</a>
             <a href="/api/status" class="api-link">API Status</a>
+            <a href="/api/qr-status" class="api-link">QR Status</a>
             <a href="https://github.com/neuralflow-ai/demo-auto" class="api-link" target="_blank">GitHub Repo</a>
         </div>
 
@@ -192,13 +213,65 @@
                 const response = await fetch('/api/status');
                 const data = await response.json();
                 console.log('Bot Status:', data);
+                
+                // Update bot status display
+                const statusElement = document.getElementById('botStatus');
+                statusElement.innerHTML = '<span class="status-indicator"></span><strong>Bot Status: Deployed & Ready</strong>';
+                statusElement.style.background = '#e8f5e8';
+                statusElement.style.borderColor = '#4caf50';
             } catch (error) {
                 console.log('Status check failed:', error);
+                const statusElement = document.getElementById('botStatus');
+                statusElement.innerHTML = '<span class="status-indicator" style="background: #f44336;"></span><strong>Bot Status: Connection Error</strong>';
+                statusElement.style.background = '#ffebee';
+                statusElement.style.borderColor = '#f44336';
             }
         }
 
-        // Update status on page load
-        updateStatus();
+        // Check for QR code
+        async function checkQRCode() {
+            try {
+                const response = await fetch('/api/qr-status');
+                const data = await response.json();
+                
+                const qrSection = document.getElementById('qrSection');
+                const qrImage = document.getElementById('qrImage');
+                const statusElement = document.getElementById('botStatus');
+                
+                if (data.hasQR) {
+                    // Show QR code section
+                    qrSection.style.display = 'block';
+                    qrImage.src = data.qrImageUrl + '?t=' + Date.now(); // Cache busting
+                    
+                    // Update status to show waiting for scan
+                    statusElement.innerHTML = '<span class="status-indicator" style="background: #ff9800;"></span><strong>Bot Status: Waiting for QR Scan</strong>';
+                    statusElement.style.background = '#fff3e0';
+                    statusElement.style.borderColor = '#ff9800';
+                } else {
+                    // Hide QR code section
+                    qrSection.style.display = 'none';
+                    
+                    // Update status to connected
+                    statusElement.innerHTML = '<span class="status-indicator"></span><strong>Bot Status: Connected & Ready</strong>';
+                    statusElement.style.background = '#e8f5e8';
+                    statusElement.style.borderColor = '#4caf50';
+                }
+            } catch (error) {
+                console.log('QR check failed:', error);
+            }
+        }
+
+        // Combined status update
+        async function updateDashboard() {
+            await updateStatus();
+            await checkQRCode();
+        }
+
+        // Update dashboard on page load
+        updateDashboard();
+        
+        // Auto-refresh every 5 seconds to check for QR code changes
+        setInterval(updateDashboard, 5000);
         
         // Update status every 30 seconds
         setInterval(updateStatus, 30000);
