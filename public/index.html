@@ -12,39 +12,181 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            background: #000000;
+            margin: 0;
+            padding: 0;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* News Studio Header */
+        .news-header {
+            background: linear-gradient(90deg, #c41e3a 0%, #8b0000 100%);
+            padding: 15px 0;
+            box-shadow: 0 4px 20px rgba(196, 30, 58, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .news-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .news-brand {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .vision-point-logo {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 2px;
+            margin: 0;
+        }
+
+        .news-tagline {
+            font-size: 0.9rem;
+            color: #ffeeee;
+            margin: 5px 0 0 0;
+            font-weight: 300;
+            letter-spacing: 1px;
         }
 
         .container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            padding: 40px;
-            max-width: 600px;
-            width: 90%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 0;
+            box-shadow: 0 0 50px rgba(0,0,0,0.3);
+            padding: 0;
+            max-width: 100%;
+            width: 100%;
+            min-height: calc(100vh - 80px);
+            color: #1a1a1a;
+        }
+
+        .main-content {
+            padding: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .breaking-news-banner {
+            background: linear-gradient(90deg, #ff0000 0%, #cc0000 100%);
+            color: white;
+            padding: 10px 0;
             text-align: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            animation: pulse 2s infinite;
         }
 
-        .logo {
-            font-size: 3rem;
-            margin-bottom: 20px;
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
         }
 
-        h1 {
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 2.5rem;
+        /* Mobile Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+                width: calc(100% - 20px);
+                border-radius: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
         }
 
-        .subtitle {
-            color: #666;
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+                margin: 5px;
+                width: calc(100% - 10px);
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .subtitle {
+                font-size: 0.9rem;
+            }
+        }
+
+        .news-title {
+            font-size: 2.8rem;
+            color: #1a1a1a;
+            margin: 20px 0 10px 0;
+            font-weight: 800;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .news-subtitle {
+            color: #444;
             margin-bottom: 30px;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            font-weight: 400;
+            text-align: center;
+            border-left: 4px solid #c41e3a;
+            padding-left: 20px;
+            display: inline-block;
+        }
+
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            background: #ff0000;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 15px;
+            animation: blink 1.5s infinite;
+        }
+
+        .live-indicator::before {
+            content: '●';
+            margin-right: 5px;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.7; }
         }
 
         .status {
@@ -119,6 +261,771 @@
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
         }
 
+        /* News Studio Dashboard */
+        .news-dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+            padding: 20px;
+            background: rgba(26, 31, 58, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(196, 30, 58, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                margin: 20px 0;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .api-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .contact-item, .script-item, .visual-item {
+                padding: 15px;
+                margin: 10px 0;
+            }
+            
+            .contact-name, .script-title, .visual-title {
+                font-size: 1rem;
+            }
+            
+            .script-preview, .visual-preview {
+                font-size: 0.9rem;
+                line-height: 1.4;
+            }
+            
+            .send-btn {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+            
+            .content-number-badge {
+                font-size: 0.8rem;
+                padding: 4px 8px;
+            }
+            
+            .matching-info {
+                font-size: 0.8rem;
+            }
+        }
+
+        .studio-panel {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 12px;
+            padding: 25px;
+            border: 2px solid #e9ecef;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .studio-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #c41e3a 0%, #8b0000 100%);
+        }
+
+        .studio-panel:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(196, 30, 58, 0.15);
+            border-color: #c41e3a;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f1f3f4;
+        }
+
+        .panel-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 0;
+        }
+
+        .status-indicator {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-connected {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-checking {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        .status-header, .qr-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .status-header h3, .qr-header h3 {
+            margin: 0;
+            color: white;
+        }
+
+        .features-list {
+            display: grid;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .feature-item {
+            background: #222222;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #ffffff;
+        }
+
+        .qr-placeholder {
+            text-align: center;
+            padding: 40px 20px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #4CAF50;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Content Management Styles */
+        .content-section {
+            background: #111111;
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 30px;
+            border: 1px solid #333333;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-header h2 {
+            margin: 0 0 10px 0;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .section-header p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+        }
+
+        .content-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.active {
+            background: #667eea;
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .contacts-header, .scripts-header, .visuals-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .contacts-header h3, .scripts-header h3, .visuals-header h3 {
+            margin: 0;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .refresh-btn {
+            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+            color: #ffffff;
+            border: 2px solid #c41e3a;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .refresh-btn:hover {
+            background: linear-gradient(135deg, #ff4757 0%, #c41e3a 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(196, 30, 58, 0.5);
+            border-color: #ff4757;
+        }
+
+        .contacts-list, .scripts-list, .visuals-list {
+            max-height: 500px;
+            overflow-y: auto;
+            border: 2px solid #333333;
+            border-radius: 12px;
+            background: #111111;
+            box-shadow: inset 0 2px 8px rgba(255,255,255,0.05);
+        }
+
+        .contact-item, .script-item, .visual-item {
+            padding: 25px;
+            border-bottom: 1px solid #333333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            background: #111111;
+            position: relative;
+        }
+
+        .contact-item:hover, .script-item:hover, .visual-item:hover {
+            background: #222222;
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+        }
+
+        .contact-item:last-child, .script-item:last-child, .visual-item:last-child {
+            border-bottom: none;
+        }
+
+        .script-item {
+            border-left: 4px solid #007bff;
+        }
+
+        .visual-item {
+            border-left: 4px solid #28a745;
+        }
+
+        .contact-item {
+            border-left: 4px solid #ffc107;
+        }
+
+        .contact-info, .script-info, .visual-info {
+            flex: 1;
+            color: #ffffff;
+        }
+
+        .contact-name, .script-title, .visual-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+            color: #ffffff;
+            line-height: 1.3;
+        }
+
+        .contact-type, .script-date, .visual-date {
+            font-size: 0.95rem;
+            color: #cccccc;
+            font-weight: 500;
+        }
+
+        /* Content Number Badge Styles */
+        .content-number-badge {
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            z-index: 10;
+        }
+
+        .script-badge {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+        }
+
+        .visual-badge {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+        }
+
+        .script-item, .visual-item {
+            position: relative;
+        }
+
+        .matching-info {
+            margin-top: 8px;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .script-preview, .visual-preview {
+            margin: 12px 0;
+            color: #ffffff;
+            font-size: 1rem;
+            line-height: 1.5;
+            background: #222222;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 3px solid #c41e3a;
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+            color: #ffffff;
+            border: 2px solid #c41e3a;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.5);
+            min-width: 120px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .send-btn:hover {
+            background: linear-gradient(135deg, #ff4757 0%, #c41e3a 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(196, 30, 58, 0.6);
+            border-color: #ff4757;
+        }
+
+        .remove-btn {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: #ffffff;
+            border: 2px solid #e74c3c;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+            min-width: 100px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .remove-btn:hover {
+            background: linear-gradient(135deg, #ff6b6b 0%, #e74c3c 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.6);
+            border-color: #ff6b6b;
+        }
+
+        .script-actions, .visual-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .script-actions, .visual-actions {
+                flex-direction: column;
+            }
+            
+            .send-btn, .remove-btn {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+        }
+
+        .matching-info {
+            margin-top: 12px;
+            padding: 8px 15px;
+            background: rgba(196, 30, 58, 0.2);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #ff6b6b;
+            border: 1px solid rgba(196, 30, 58, 0.5);
+            font-weight: 600;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: #111111;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(196, 30, 58, 0.3);
+            border: 2px solid #c41e3a;
+        }
+
+        .modal-header {
+            padding: 30px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .close {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        .close:hover {
+            opacity: 0.7;
+        }
+
+        .modal-body {
+            padding: 30px;
+            max-height: 50vh;
+            overflow-y: auto;
+            color: #ffffff;
+        }
+
+        .contact-selection {
+            margin-bottom: 20px;
+        }
+
+        .contact-selection h4 {
+            margin: 0 0 10px 0;
+            color: #ffffff;
+            font-size: 1.2rem;
+        }
+
+        .contact-select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #333333;
+            border-radius: 10px;
+            background: #222222;
+            color: #ffffff;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-select:focus {
+            outline: none;
+            border-color: #c41e3a;
+        }
+
+        .content-preview {
+            background: #222222;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #333333;
+            max-height: 300px;
+            overflow-y: auto;
+            color: #ffffff;
+        }
+
+        .modal-footer {
+            padding: 30px;
+            border-top: 1px solid #333333;
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            background: #111111;
+        }
+
+        .btn-cancel, .btn-send {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .btn-cancel {
+            background: #333333;
+            color: #ffffff;
+            border: 2px solid #555555;
+        }
+
+        .btn-cancel:hover {
+            background: #444444;
+            transform: translateY(-2px);
+        }
+
+        .btn-send {
+            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+            color: #ffffff;
+            border: 2px solid #c41e3a;
+        }
+
+        .btn-send:hover {
+            background: linear-gradient(135deg, #ff4757 0%, #c41e3a 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(196, 30, 58, 0.5);
+        }
+
+        .btn-send:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .loading-placeholder {
+            text-align: center;
+            padding: 40px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .empty-state h4 {
+             margin: 0 0 10px 0;
+             color: rgba(255, 255, 255, 0.8);
+             font-size: 1.2rem;
+         }
+
+         /* Notification Styles */
+         .notification {
+             position: fixed;
+             top: 20px;
+             right: 20px;
+             z-index: 10000;
+             min-width: 300px;
+             max-width: 500px;
+             border-radius: 12px;
+             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+             animation: slideInRight 0.3s ease-out;
+             margin-bottom: 10px;
+         }
+
+         .notification-success {
+             background: linear-gradient(135deg, #4CAF50, #45a049);
+             border-left: 4px solid #2E7D32;
+         }
+
+         .notification-error {
+             background: linear-gradient(135deg, #f44336, #d32f2f);
+             border-left: 4px solid #C62828;
+         }
+
+         .notification-info {
+             background: linear-gradient(135deg, #2196F3, #1976D2);
+             border-left: 4px solid #1565C0;
+         }
+
+         .notification-content {
+             display: flex;
+             align-items: center;
+             padding: 15px 20px;
+             color: white;
+         }
+
+         .notification-icon {
+             font-size: 1.2rem;
+             margin-right: 12px;
+             flex-shrink: 0;
+         }
+
+         .notification-message {
+             flex: 1;
+             font-size: 0.95rem;
+             line-height: 1.4;
+         }
+
+         .notification-close {
+             background: none;
+             border: none;
+             color: white;
+             font-size: 1.5rem;
+             cursor: pointer;
+             padding: 0;
+             margin-left: 12px;
+             opacity: 0.8;
+             transition: opacity 0.3s ease;
+         }
+
+         .notification-close:hover {
+             opacity: 1;
+         }
+
+         @keyframes slideInRight {
+             from {
+                 transform: translateX(100%);
+                 opacity: 0;
+             }
+             to {
+                 transform: translateX(0);
+                 opacity: 1;
+             }
+         }
+
+         /* Responsive Design Improvements */
+         @media (max-width: 768px) {
+             .content-tabs {
+                 gap: 8px;
+             }
+
+             .tab-btn {
+                 padding: 8px 16px;
+                 font-size: 0.9rem;
+             }
+
+             .contacts-header, .scripts-header, .visuals-header {
+                 flex-direction: column;
+                 align-items: stretch;
+                 gap: 10px;
+             }
+
+             .contact-item, .script-item, .visual-item {
+                 flex-direction: column;
+                 align-items: stretch;
+                 gap: 10px;
+             }
+
+             .send-btn {
+                 align-self: flex-end;
+             }
+
+             .modal-content {
+                 width: 95%;
+                 margin: 2% auto;
+             }
+
+             .modal-header, .modal-body, .modal-footer {
+                 padding: 20px;
+             }
+
+             .notification {
+                 top: 10px;
+                 right: 10px;
+                 left: 10px;
+                 min-width: auto;
+             }
+         }
+
+         @media (max-width: 480px) {
+             .dashboard-grid {
+                 grid-template-columns: 1fr;
+             }
+
+             .content-section {
+                 padding: 20px;
+                 margin-top: 20px;
+             }
+
+             .section-header h2 {
+                 font-size: 1.5rem;
+             }
+
+             .tab-btn {
+                 padding: 6px 12px;
+                 font-size: 0.8rem;
+             }
+         }
+
         .footer {
             margin-top: 30px;
             padding-top: 20px;
@@ -144,14 +1051,29 @@
     </style>
 </head>
 <body>
+    <!-- News Studio Header -->
+    <div class="news-header">
+        <div class="news-brand">
+            <div class="vision-point-logo">📺 VISION POINT</div>
+            <div class="news-tagline">LIVE NEWS STUDIO</div>
+        </div>
+        <div class="live-indicator">🔴 LIVE</div>
+    </div>
+
+    <!-- Breaking News Banner -->
+    <div class="breaking-news-banner">
+        <span class="breaking-text">BREAKING NEWS</span>
+        <span class="breaking-content">WhatsApp News Distribution System - Real-time Content Management</span>
+    </div>
+
     <div class="container">
-        <div class="logo">🤖</div>
-        <h1>WhatsApp News Bot</h1>
-        <p class="subtitle">AI-Powered News Generation & Distribution</p>
+        <div class="main-content">
+            <h1 class="news-title">Vision Point News Studio</h1>
+            <p class="news-subtitle">Professional News Content Management & Distribution Platform</p>
         
         <div class="status" id="botStatus">
             <span class="status-indicator"></span>
-            <strong>Bot Status: Checking...</strong>
+            <strong>Bot Status: <span id="botStatusText">Connected</span></strong>
         </div>
 
         <!-- QR Code Section -->
@@ -160,7 +1082,7 @@
                 <h3 style="color: #856404; margin-bottom: 15px;">📱 WhatsApp Authentication Required</h3>
                 <p style="color: #856404; margin-bottom: 15px;">Scan this QR code with WhatsApp to connect the bot:</p>
                 <div style="text-align: center; margin: 20px 0;">
-                    <img id="qrImage" src="" alt="QR Code" style="max-width: 300px; border: 2px solid #ddd; border-radius: 10px;">
+                    <img id="qrImage" src="" alt="QR Code" style="width: 300px; height: auto; min-height: 300px; max-width: 300px; border: 2px solid #ddd; border-radius: 10px; display: block; margin: 20px auto;">
                 </div>
                 <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-top: 15px;">
                     <strong>Instructions:</strong>
@@ -174,35 +1096,110 @@
             </div>
         </div>
 
-        <div class="features">
-            <div class="feature">
-                <h3>🧠 AI Integration</h3>
-                <p>Powered by Perplexity AI for intelligent news generation and content creation</p>
+        <!-- Disconnect Section -->
+        <div id="disconnectSection" style="display: none;">
+            <div style="background: #f8d7da; border: 2px solid #dc3545; border-radius: 10px; padding: 20px; margin: 20px 0; text-align: center;">
+                <h3 style="color: #721c24; margin-bottom: 15px;">🔌 WhatsApp Connection Management</h3>
+                <p style="color: #721c24; margin-bottom: 20px;">WhatsApp is currently connected. Click the button below to disconnect and generate a new QR code.</p>
+                <button id="disconnectBtn" onclick="disconnectWhatsApp()" style="background: #dc3545; color: white; border: none; padding: 12px 24px; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">🔌 Disconnect WhatsApp</button>
+                <div id="disconnectStatus" style="margin-top: 15px; display: none;"></div>
             </div>
-            <div class="feature">
-                <h3>🌍 Urdu Support</h3>
-                <p>Specialized in generating high-quality Urdu news content without citation numbers</p>
+        </div>
+
+
+
+        <!-- News Content Management Section -->
+        <div class="content-section">
+            <div class="section-header">
+                <h2>📡 NEWSROOM CONTROL CENTER</h2>
+                <p>Professional news content management and distribution system</p>
             </div>
-            <div class="feature">
-                <h3>📱 WhatsApp Ready</h3>
-                <p>Seamless integration with WhatsApp groups for automated content distribution</p>
+
+            <div class="content-tabs">
+                <button class="tab-btn active" onclick="showTab('contacts')">📱 AUDIENCE</button>
+                <button class="tab-btn" onclick="showTab('scripts')">📰 NEWS SCRIPTS</button>
+                <button class="tab-btn" onclick="showTab('visuals')">🎥 VISUAL CONTENT</button>
             </div>
-            <div class="feature">
-                <h3>🎨 Visual Content</h3>
-                <p>Automatic visual content generation and image search capabilities</p>
+
+            <!-- Audience Tab -->
+            <div id="contacts-tab" class="tab-content active">
+                <div class="contacts-container">
+                    <div class="contacts-header">
+                        <h3>📱 AUDIENCE DATABASE</h3>
+                        <div class="header-buttons">
+                            <button class="refresh-btn" onclick="refreshContacts()">🔄 REFRESH CONTACTS</button>
+                            <button class="refresh-btn" onclick="refreshCurrentTab()">🔄 UPDATE</button>
+                        </div>
+                    </div>
+                    <div class="contacts-list" id="contactsList">
+                        <!-- Contacts will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- News Scripts Tab -->
+            <div id="scripts-tab" class="tab-content">
+                <div class="scripts-container">
+                    <div class="scripts-header">
+                        <h3>📰 BREAKING NEWS SCRIPTS</h3>
+                        <button class="refresh-btn" onclick="refreshCurrentTab()">🔄 UPDATE</button>
+                    </div>
+                    <div class="scripts-list" id="scriptsList">
+                        <!-- Scripts will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visual Content Tab -->
+            <div id="visuals-tab" class="tab-content">
+                <div class="visuals-container">
+                    <div class="visuals-header">
+                        <h3>🎥 STUDIO VISUAL CONTENT</h3>
+                        <button class="refresh-btn" onclick="refreshCurrentTab()">🔄 UPDATE</button>
+                    </div>
+                    <div class="visuals-list" id="visualsList">
+                        <!-- Visuals will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Broadcast Modal -->
+        <div id="sendModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalTitle">📡 BROADCAST CONTENT</h3>
+                    <span class="close" onclick="closeSendModal()">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div class="contact-selection">
+                        <h4>Select Audience:</h4>
+                        <select id="contactSelect" class="contact-select">
+                            <option value="">Choose audience...</option>
+                        </select>
+                    </div>
+                    <div class="content-preview" id="contentPreview">
+                        <!-- Content preview will be loaded here -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-cancel" onclick="closeSendModal()">Cancel</button>
+                    <button class="btn-send" id="sendBtn" onclick="sendContent()">📡 BROADCAST</button>
+                </div>
             </div>
         </div>
 
         <div class="api-links">
-            <a href="/health" class="api-link">Health Check</a>
-            <a href="/api/status" class="api-link">API Status</a>
-            <a href="/api/qr-status" class="api-link">QR Status</a>
-            <a href="https://github.com/neuralflow-ai/demo-auto" class="api-link" target="_blank">GitHub Repo</a>
+            <a href="/health" class="api-link">System Health</a>
+            <a href="/api/status" class="api-link">Studio Status</a>
+            <a href="/api/qr-status" class="api-link">Connection Status</a>
+            <a href="https://github.com/neuralflow-ai/demo-auto" class="api-link" target="_blank">Source Code</a>
         </div>
 
         <div class="footer">
-            <p>Deployed on Render • Version 1.0.0</p>
-            <p>Built with Node.js & Perplexity AI</p>
+            <p>📺 Vision Point News Studio • Live Broadcasting System v1.0.0</p>
+            <p>Powered by Advanced AI Technology & Real-time Distribution</p>
+        </div>
         </div>
     </div>
 
@@ -212,15 +1209,36 @@
             try {
                 const response = await fetch('/api/status');
                 const data = await response.json();
-                console.log('Bot Status:', data);
                 
-                // Update bot status display
+                // Check WhatsApp connection status to preserve correct display
+                const qrResponse = await fetch('/api/qr-status');
+                const qrData = await qrResponse.json();
+                
+                // Update bot status display based on WhatsApp connection
                 const statusElement = document.getElementById('botStatus');
-                statusElement.innerHTML = '<span class="status-indicator"></span><strong>Bot Status: Deployed & Ready</strong>';
-                statusElement.style.background = '#e8f5e8';
-                statusElement.style.borderColor = '#4caf50';
+                const disconnectSection = document.getElementById('disconnectSection');
+                const qrSection = document.getElementById('qrSection');
+                
+                if (qrData.connected) {
+                    statusElement.innerHTML = `<span class="status-indicator"></span><strong>Bot Status: Connected & Ready${qrData.botNumber ? ' (' + qrData.botNumber + ')' : ''}</strong>`;
+                    statusElement.style.background = '#e8f5e8';
+                    statusElement.style.borderColor = '#4caf50';
+                    
+                    // Show disconnect section when connected
+                    if (disconnectSection) {
+                        disconnectSection.style.display = 'block';
+                    }
+                    if (qrSection) qrSection.style.display = 'none';
+                } else {
+                    statusElement.innerHTML = '<span class="status-indicator"></span><strong>Bot Status: Deployed & Ready</strong>';
+                    statusElement.style.background = '#e8f5e8';
+                    statusElement.style.borderColor = '#4caf50';
+                    
+                    // Hide disconnect section when not connected
+                    if (disconnectSection) disconnectSection.style.display = 'none';
+                }
             } catch (error) {
-                console.log('Status check failed:', error);
+                console.error('Status check failed:', error);
                 const statusElement = document.getElementById('botStatus');
                 statusElement.innerHTML = '<span class="status-indicator" style="background: #f44336;"></span><strong>Bot Status: Connection Error</strong>';
                 statusElement.style.background = '#ffebee';
@@ -228,53 +1246,691 @@
             }
         }
 
-        // Check for QR code
+        // WebSocket connection for real-time updates
+        let ws = null;
+        
+        function connectWebSocket() {
+            const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsUrl = `${protocol}//${window.location.host}`;
+            
+            ws = new WebSocket(wsUrl);
+            
+            ws.onopen = function() {
+                console.log('🔌 WebSocket connected');
+            };
+            
+            ws.onmessage = function(event) {
+                try {
+                    const data = JSON.parse(event.data);
+                    if (data.type === 'qr_update') {
+                        handleQRUpdate(data);
+                    }
+                } catch (error) {
+                    console.error('❌ Failed to parse WebSocket message:', error);
+                }
+            };
+            
+            ws.onclose = function() {
+                console.log('🔌 WebSocket disconnected, attempting to reconnect...');
+                setTimeout(connectWebSocket, 3000); // Reconnect after 3 seconds
+            };
+            
+            ws.onerror = function(error) {
+                console.error('❌ WebSocket error:', error);
+            };
+        }
+        
+        function handleQRUpdate(data) {
+            const qrSection = document.getElementById('qrSection');
+            const qrImage = document.getElementById('qrImage');
+            const statusElement = document.getElementById('botStatus');
+            const disconnectSection = document.getElementById('disconnectSection');
+            
+            if (data.hasQR) {
+                // Show QR code section, hide disconnect section
+                qrSection.style.display = 'block';
+                disconnectSection.style.display = 'none';
+                qrImage.src = data.qrImageUrl + '?t=' + Date.now(); // Cache busting
+                
+                // Update connection status
+                isWhatsAppConnected = false;
+                
+                // Refresh contacts tab if it's currently active
+                if (document.getElementById('contacts-tab').classList.contains('active')) {
+                    loadContacts();
+                }
+                
+                // Update status to show waiting for scan
+                statusElement.innerHTML = '<span class="status-indicator" style="background: #ff9800;"></span><strong>Bot Status: Waiting for QR Scan</strong>';
+                statusElement.style.background = '#fff3e0';
+                statusElement.style.borderColor = '#ff9800';
+                
+                // Show notification
+                showNotification('📱 QR Code ready! Please scan with WhatsApp', 'info');
+                
+            } else if (data.connected) {
+                // Hide QR code section, show disconnect section
+                qrSection.style.display = 'none';
+                disconnectSection.style.display = 'block';
+                
+                // Update connection status
+                isWhatsAppConnected = true;
+                
+                // Update status with connection info
+                statusElement.innerHTML = `<span class="status-indicator"></span><strong>Bot Status: Connected & Ready${data.botNumber ? ' (' + data.botNumber + ')' : ''}</strong>`;
+                statusElement.style.background = '#e8f5e8';
+                statusElement.style.borderColor = '#4caf50';
+                
+                // Refresh contacts tab if it's currently active
+                if (document.getElementById('contacts-tab').classList.contains('active')) {
+                    loadContacts();
+                }
+                
+                // Show success message
+                if (data.message) {
+                    showNotification(data.message, 'success');
+                }
+                
+            } else {
+                // Hide QR code section only (let updateStatus handle disconnect section)
+                qrSection.style.display = 'none';
+                
+                // Update connection status
+                isWhatsAppConnected = true;
+                
+                // Update status to connected
+                statusElement.innerHTML = '<span class="status-indicator"></span><strong>Bot Status: Connected & Ready</strong>';
+                statusElement.style.background = '#e8f5e8';
+                statusElement.style.borderColor = '#4caf50';
+            }
+        }
+        
+        // Fallback QR check function for initial load
         async function checkQRCode() {
             try {
                 const response = await fetch('/api/qr-status');
                 const data = await response.json();
-                
-                const qrSection = document.getElementById('qrSection');
-                const qrImage = document.getElementById('qrImage');
-                const statusElement = document.getElementById('botStatus');
-                
-                if (data.hasQR) {
-                    // Show QR code section
-                    qrSection.style.display = 'block';
-                    qrImage.src = data.qrImageUrl + '?t=' + Date.now(); // Cache busting
-                    
-                    // Update status to show waiting for scan
-                    statusElement.innerHTML = '<span class="status-indicator" style="background: #ff9800;"></span><strong>Bot Status: Waiting for QR Scan</strong>';
-                    statusElement.style.background = '#fff3e0';
-                    statusElement.style.borderColor = '#ff9800';
-                } else {
-                    // Hide QR code section
-                    qrSection.style.display = 'none';
-                    
-                    // Update status to connected
-                    statusElement.innerHTML = '<span class="status-indicator"></span><strong>Bot Status: Connected & Ready</strong>';
-                    statusElement.style.background = '#e8f5e8';
-                    statusElement.style.borderColor = '#4caf50';
-                }
+                handleQRUpdate(data);
             } catch (error) {
                 console.log('QR check failed:', error);
+            }
+        }
+
+        // Disconnect WhatsApp function
+        async function disconnectWhatsApp() {
+            const disconnectBtn = document.getElementById('disconnectBtn');
+            const disconnectStatus = document.getElementById('disconnectStatus');
+            
+            try {
+                // Disable button and show loading state
+                disconnectBtn.disabled = true;
+                disconnectBtn.innerHTML = '🔄 Disconnecting...';
+                disconnectBtn.style.background = '#6c757d';
+                
+                // Show status message
+                disconnectStatus.style.display = 'block';
+                disconnectStatus.innerHTML = '<p style="color: #856404; margin: 0;">⏳ Disconnecting from WhatsApp...</p>';
+                
+                const response = await fetch('/api/disconnect', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Update connection status
+                    isWhatsAppConnected = false;
+                    
+                    disconnectStatus.innerHTML = '<p style="color: #155724; margin: 0;">✅ ' + result.message + '</p>';
+                    showNotification('WhatsApp disconnected successfully! New QR code will be generated.', 'success');
+                    
+                    // Hide disconnect section after successful disconnect
+                    setTimeout(() => {
+                        document.getElementById('disconnectSection').style.display = 'none';
+                    }, 2000);
+                } else {
+                    throw new Error(result.error || 'Failed to disconnect');
+                }
+                
+            } catch (error) {
+                console.error('Error disconnecting WhatsApp:', error);
+                disconnectStatus.innerHTML = '<p style="color: #721c24; margin: 0;">❌ Failed to disconnect: ' + error.message + '</p>';
+                showNotification('Failed to disconnect WhatsApp: ' + error.message, 'error');
+                
+                // Re-enable button
+                disconnectBtn.disabled = false;
+                disconnectBtn.innerHTML = '🔌 Disconnect WhatsApp';
+                disconnectBtn.style.background = '#dc3545';
             }
         }
 
         // Combined status update
         async function updateDashboard() {
             await updateStatus();
-            await checkQRCode();
+            await checkQRCode(); // Initial check
+            
+            // Connect WebSocket for real-time updates
+            connectWebSocket();
         }
 
         // Update dashboard on page load
         updateDashboard();
         
-        // Auto-refresh every 5 seconds to check for QR code changes
-        setInterval(updateDashboard, 5000);
-        
-        // Update status every 30 seconds
+        // Update status every 30 seconds (reduced frequency since WebSocket handles QR updates)
         setInterval(updateStatus, 30000);
+
+        // Content Management JavaScript
+        let currentContacts = [];
+        let currentScripts = [];
+        let currentVisuals = [];
+        let isWhatsAppConnected = false; // Track WhatsApp connection status
+        let selectedContent = null;
+        let selectedContentType = null;
+
+        // Tab switching functionality
+        function showTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName + '-tab').classList.add('active');
+            document.querySelector(`[onclick="showTab('${tabName}')"]`).classList.add('active');
+            
+            // Load data for the selected tab
+            if (tabName === 'contacts') {
+                loadContacts();
+            } else if (tabName === 'scripts') {
+                loadScripts();
+            } else if (tabName === 'visuals') {
+                loadVisuals();
+            }
+        }
+
+        // Load contacts from API
+        async function loadContacts() {
+            const contactsList = document.getElementById('contactsList');
+            
+            // Check if WhatsApp is connected before loading contacts
+            if (!isWhatsAppConnected) {
+                contactsList.innerHTML = '<div class="empty-state"><h4>WhatsApp Not Connected</h4><p>Please connect your WhatsApp account by scanning the QR code to view contacts.</p></div>';
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/contacts');
+                if (response.ok) {
+                    const data = await response.json();
+                    currentContacts = data.contacts || data || [];
+                    displayContacts();
+                } else {
+                    throw new Error('Failed to load contacts');
+                }
+            } catch (error) {
+                console.error('Error loading contacts:', error);
+                contactsList.innerHTML = '<div class="empty-state"><h4>Error Loading Contacts</h4><p>Unable to fetch contacts. Please try again.</p></div>';
+            }
+        }
+
+        // Refresh contacts from WhatsApp
+        async function refreshContacts() {
+            const contactsList = document.getElementById('contactsList');
+            
+            // Check if WhatsApp is connected
+            if (!isWhatsAppConnected) {
+                alert('WhatsApp is not connected. Please scan the QR code first.');
+                return;
+            }
+            
+            try {
+                // Show loading state
+                contactsList.innerHTML = '<div class="loading-state"><h4>🔄 Refreshing Contacts...</h4><p>Fetching latest contacts from WhatsApp...</p></div>';
+                
+                // Call the refresh API
+                const response = await fetch('/api/contacts/refresh', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    if (result.success) {
+                        // Wait a moment for the contacts to be saved, then reload
+                        setTimeout(() => {
+                            loadContacts();
+                        }, 1000);
+                    } else {
+                        throw new Error(result.error || 'Failed to refresh contacts');
+                    }
+                } else {
+                    throw new Error('Failed to refresh contacts');
+                }
+            } catch (error) {
+                console.error('Error refreshing contacts:', error);
+                contactsList.innerHTML = '<div class="empty-state"><h4>❌ Refresh Failed</h4><p>' + error.message + '</p></div>';
+                // Reload the original contacts after a delay
+                setTimeout(() => {
+                    loadContacts();
+                }, 2000);
+            }
+        }
+
+        // Display contacts in the UI
+        function displayContacts() {
+            const contactsList = document.getElementById('contactsList');
+            
+            if (currentContacts.length === 0) {
+                contactsList.innerHTML = '<div class="empty-state"><h4>No Contacts Found</h4><p>No WhatsApp contacts available yet.</p></div>';
+                return;
+            }
+            
+            contactsList.innerHTML = currentContacts.map(contact => `
+                <div class="contact-item">
+                    <div class="contact-info">
+                        <div class="contact-name">${contact.name || contact.id}</div>
+                        <div class="contact-type">${contact.type || 'Contact'} • ${contact.id}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Load scripts from API
+        async function loadScripts() {
+            const scriptsList = document.getElementById('scriptsList');
+            
+            try {
+                const response = await fetch('/api/scripts');
+                if (response.ok) {
+                    const data = await response.json();
+                    currentScripts = data.scripts || data || [];
+                    displayScripts();
+                } else {
+                    throw new Error('Failed to load scripts');
+                }
+            } catch (error) {
+                console.error('Error loading scripts:', error);
+                scriptsList.innerHTML = '<div class="empty-state"><h4>Error Loading Scripts</h4><p>Unable to fetch scripts. Please try again.</p></div>';
+            }
+        }
+
+        // Display scripts in the UI
+        function displayScripts() {
+            const scriptsList = document.getElementById('scriptsList');
+            
+            if (currentScripts.length === 0) {
+                scriptsList.innerHTML = '<div class="empty-state"><h4>No Scripts Found</h4><p>No generated scripts available yet.</p></div>';
+                return;
+            }
+            
+            scriptsList.innerHTML = currentScripts.map(script => `
+                <div class="script-item" data-script-id="${script.id}">
+                    <div class="content-number-badge script-badge">Script #${script.id}</div>
+                    <div class="script-info">
+                        <div class="script-title">${script.title || 'News Script'}</div>
+                        <div class="script-date">${new Date(script.timestamp).toLocaleString()}</div>
+                        <div class="script-preview">${script.content.substring(0, 150)}...</div>
+                        <div class="matching-info">📝 Matches with Visual #${script.id}</div>
+                    </div>
+                    <div class="script-actions">
+                        <button class="send-btn" onclick="openSendModal('script', ${script.id})">
+                            📤 Send Script #${script.id}
+                        </button>
+                        <button class="remove-btn" onclick="removeScript('${script.id}')">
+                                🗑️ Remove
+                            </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Load visuals from API
+        async function loadVisuals() {
+            const visualsList = document.getElementById('visualsList');
+            
+            try {
+                const response = await fetch('/api/visuals');
+                if (response.ok) {
+                    const data = await response.json();
+                    currentVisuals = data.visuals || data || [];
+                    displayVisuals();
+                } else {
+                    throw new Error('Failed to load visuals');
+                }
+            } catch (error) {
+                console.error('Error loading visuals:', error);
+                visualsList.innerHTML = '<div class="empty-state"><h4>Error Loading Visuals</h4><p>Unable to fetch visuals. Please try again.</p></div>';
+            }
+        }
+
+        // Display visuals in the UI
+        function displayVisuals() {
+            const visualsList = document.getElementById('visualsList');
+            
+            if (currentVisuals.length === 0) {
+                visualsList.innerHTML = '<div class="empty-state"><h4>No Visuals Found</h4><p>No generated visual content available yet.</p></div>';
+                return;
+            }
+            
+            visualsList.innerHTML = currentVisuals.map(visual => {
+                const videoCount = visual.videos ? visual.videos.length : 0;
+                const articleCount = visual.articles ? visual.articles.length : 0;
+                const imageCount = visual.images ? visual.images.length : 0;
+                
+                const previewText = `${videoCount} videos, ${articleCount} articles, ${imageCount} images`;
+                const firstVideo = visual.videos && visual.videos[0] ? visual.videos[0].title : 'Visual Content';
+                
+                return `
+                    <div class="visual-item" data-visual-id="${visual.id}">
+                        <div class="content-number-badge visual-badge">Visual #${visual.id}</div>
+                        <div class="visual-info">
+                            <div class="visual-title">${firstVideo}</div>
+                            <div class="visual-date">${new Date(visual.timestamp).toLocaleString()}</div>
+                            <div class="visual-preview">${previewText}</div>
+                            <div class="matching-info">🎨 Matches with Script #${visual.id}</div>
+                        </div>
+                        <div class="visual-actions">
+                            <button class="send-btn" onclick="openSendModal('visual', ${visual.id})">
+                                📤 Send Visual #${visual.id}
+                            </button>
+                            <button class="remove-btn" onclick="removeVisual('${visual.id}')">
+                                🗑️ Remove
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Open send modal
+        function openSendModal(contentType, contentId) {
+            selectedContentType = contentType;
+            
+            // Convert contentId to string for comparison since IDs are stored as strings
+            const contentIdStr = contentId.toString();
+            
+            if (contentType === 'script') {
+                selectedContent = currentScripts.find(s => s.id === contentIdStr);
+            } else if (contentType === 'visual') {
+                selectedContent = currentVisuals.find(v => v.id === contentIdStr);
+            }
+            
+            if (!selectedContent) {
+                alert('Content not found!');
+                return;
+            }
+            
+            // Update modal content
+            document.getElementById('modalTitle').textContent = `Send ${contentType.charAt(0).toUpperCase() + contentType.slice(1)}`;
+            
+            // Set content preview based on type
+            const contentPreview = document.getElementById('contentPreview');
+            if (contentType === 'script') {
+                contentPreview.textContent = selectedContent.content || 'No content available';
+            } else if (contentType === 'visual') {
+                const videoCount = selectedContent.videos ? selectedContent.videos.length : 0;
+                const articleCount = selectedContent.articles ? selectedContent.articles.length : 0;
+                const imageCount = selectedContent.images ? selectedContent.images.length : 0;
+                contentPreview.innerHTML = `
+                    <h4>Visual Content #${selectedContent.id}</h4>
+                    <p><strong>Videos:</strong> ${videoCount}</p>
+                    <p><strong>Articles:</strong> ${articleCount}</p>
+                    <p><strong>Images:</strong> ${imageCount}</p>
+                    <p><strong>Created:</strong> ${new Date(selectedContent.timestamp).toLocaleString()}</p>
+                `;
+            }
+            
+            // Populate contact dropdown
+            const contactSelect = document.getElementById('contactSelect');
+            contactSelect.innerHTML = '<option value="">Choose a contact...</option>' + 
+                currentContacts.map(contact => 
+                    `<option value="${contact.id}">${contact.name || contact.id}</option>`
+                ).join('');
+            
+            // Show modal
+            document.getElementById('sendModal').style.display = 'block';
+        }
+
+        // Close modal
+        function closeSendModal() {
+            document.getElementById('sendModal').style.display = 'none';
+            selectedContent = null;
+            selectedContentType = null;
+        }
+
+        // Send content to selected contact
+        async function sendContent() {
+            const contactId = document.getElementById('contactSelect').value;
+            
+            if (!contactId) {
+                showNotification('Please select a contact!', 'error');
+                return;
+            }
+            
+            if (!selectedContent || !selectedContentType) {
+                showNotification('No content selected!', 'error');
+                return;
+            }
+            
+            const sendBtn = document.getElementById('sendBtn');
+            sendBtn.disabled = true;
+            sendBtn.textContent = 'Sending...';
+            
+            try {
+                const response = await fetch(`/api/send-${selectedContentType}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        contactId: contactId,
+                        contentId: selectedContent.id
+                    })
+                });
+                
+                if (response.ok) {
+                    showNotification(`${selectedContentType.charAt(0).toUpperCase() + selectedContentType.slice(1)} sent successfully!`, 'success');
+                    closeSendModal();
+                } else {
+                    throw new Error('Failed to send content');
+                }
+            } catch (error) {
+                console.error('Error sending content:', error);
+                showNotification('Failed to send content. Please try again.', 'error');
+            } finally {
+                sendBtn.disabled = false;
+                sendBtn.textContent = '📤 BROADCAST';
+            }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('sendModal');
+            if (event.target === modal) {
+                closeSendModal();
+            }
+        }
+
+        // Real-time updates functionality
+         let autoRefreshInterval;
+         let currentActiveTab = 'contacts';
+
+         function startAutoRefresh() {
+             // Refresh every 30 seconds
+             autoRefreshInterval = setInterval(() => {
+                 if (currentActiveTab === 'contacts') {
+                     loadContacts();
+                 } else if (currentActiveTab === 'scripts') {
+                     loadScripts();
+                 } else if (currentActiveTab === 'visuals') {
+                     loadVisuals();
+                 }
+             }, 30000);
+         }
+
+         function stopAutoRefresh() {
+             if (autoRefreshInterval) {
+                 clearInterval(autoRefreshInterval);
+             }
+         }
+
+         // Enhanced tab switching with auto-refresh tracking
+         function showTab(tabName) {
+             currentActiveTab = tabName;
+             
+             // Hide all tab contents
+             document.querySelectorAll('.tab-content').forEach(content => {
+                 content.classList.remove('active');
+             });
+             
+             // Remove active class from all tab buttons
+             document.querySelectorAll('.tab-btn').forEach(btn => {
+                 btn.classList.remove('active');
+             });
+             
+             // Show selected tab content
+             document.getElementById(tabName + '-tab').classList.add('active');
+             document.querySelector(`[onclick="showTab('${tabName}')"]`).classList.add('active');
+             
+             // Load data for the selected tab
+             if (tabName === 'contacts') {
+                 loadContacts();
+             } else if (tabName === 'scripts') {
+                 loadScripts();
+             } else if (tabName === 'visuals') {
+                 loadVisuals();
+             }
+         }
+
+         // Add refresh buttons functionality
+         function refreshCurrentTab() {
+             if (currentActiveTab === 'contacts') {
+                 loadContacts();
+             } else if (currentActiveTab === 'scripts') {
+                 loadScripts();
+             } else if (currentActiveTab === 'visuals') {
+                 loadVisuals();
+             }
+         }
+
+         // Initialize content management on page load
+         document.addEventListener('DOMContentLoaded', function() {
+             // Set default active tab
+             currentActiveTab = 'contacts';
+             showTab('contacts');
+             
+             // Start auto-refresh
+             startAutoRefresh();
+             
+             // Add visibility change listener to pause/resume auto-refresh
+             document.addEventListener('visibilitychange', function() {
+                 if (document.hidden) {
+                     stopAutoRefresh();
+                 } else {
+                     startAutoRefresh();
+                 }
+             });
+         });
+
+         // Enhanced notification system
+         function showNotification(message, type = 'success') {
+             // Create notification element
+             const notification = document.createElement('div');
+             notification.className = `notification notification-${type}`;
+             notification.innerHTML = `
+                 <div class="notification-content">
+                     <span class="notification-icon">${type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️'}</span>
+                     <span class="notification-message">${message}</span>
+                     <button class="notification-close" onclick="this.parentElement.parentElement.remove()">×</button>
+                 </div>
+             `;
+             
+             // Add to page
+             document.body.appendChild(notification);
+             
+             // Auto-remove after 5 seconds
+             setTimeout(() => {
+                 if (notification.parentElement) {
+                     notification.remove();
+                 }
+             }, 5000);
+         }
+
+
+
+         // Remove script function (permanent deletion)
+         async function removeScript(scriptId) {
+             if (!confirm('Are you sure you want to permanently remove this script?')) {
+                 return;
+             }
+
+             try {
+                 const response = await fetch('/api/delete-script', {
+                     method: 'DELETE',
+                     headers: {
+                         'Content-Type': 'application/json'
+                     },
+                     body: JSON.stringify({ scriptId })
+                 });
+
+                 if (response.ok) {
+                     // Remove from DOM
+                     const scriptElement = document.querySelector(`[data-script-id="${scriptId}"]`);
+                     if (scriptElement) {
+                         scriptElement.remove();
+                     }
+                     showNotification('Script permanently deleted!', 'success');
+                 } else {
+                     const error = await response.text();
+                     showNotification(`Failed to delete script: ${error}`, 'error');
+                 }
+             } catch (error) {
+                 console.error('Error deleting script:', error);
+                 showNotification('Error deleting script', 'error');
+             }
+         }
+
+         // Remove visual function (permanent deletion)
+         async function removeVisual(visualId) {
+             if (!confirm('Are you sure you want to permanently remove this visual?')) {
+                 return;
+             }
+
+             try {
+                 const response = await fetch('/api/delete-visual', {
+                     method: 'DELETE',
+                     headers: {
+                         'Content-Type': 'application/json'
+                     },
+                     body: JSON.stringify({ visualId })
+                 });
+
+                 if (response.ok) {
+                     // Remove from DOM
+                     const visualElement = document.querySelector(`[data-visual-id="${visualId}"]`);
+                     if (visualElement) {
+                         visualElement.remove();
+                     }
+                     showNotification('Visual permanently deleted!', 'success');
+                 } else {
+                     const error = await response.text();
+                     showNotification(`Failed to delete visual: ${error}`, 'error');
+                 }
+             } catch (error) {
+                 console.error('Error deleting visual:', error);
+                 showNotification('Error deleting visual', 'error');
+             }
+         }
     </script>
 </body>
 </html>

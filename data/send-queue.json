@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1755280611496,
+    "type": "script",
+    "contactId": "120363422265060742@g.us",
+    "contentId": "1755279111718",
+    "timestamp": "2025-08-15T17:56:51.496Z",
+    "status": "completed",
+    "sentAt": "2025-08-15T17:57:11.417Z"
+  },
+  {
+    "id": 1755280747391,
+    "type": "script",
+    "contactId": "120363419146083605@g.us",
+    "contentId": "1755279111718",
+    "timestamp": "2025-08-15T17:59:07.391Z",
+    "status": "failed",
+    "error": "Message sending timed out after 30 seconds"
+  },
+  {
+    "id": 1755280936934,
+    "type": "script",
+    "contactId": "120363422265060742@g.us",
+    "contentId": "1755279111718",
+    "timestamp": "2025-08-15T18:02:16.934Z",
+    "status": "completed",
+    "sentAt": "2025-08-15T18:02:42.126Z"
+  },
+  {
+    "id": 1755280970337,
+    "type": "visual",
+    "contactId": "120363402832657373@g.us",
+    "contentId": "1755279118884",
+    "timestamp": "2025-08-15T18:02:50.337Z",
+    "status": "completed",
+    "sentAt": "2025-08-15T18:03:11.664Z"
+  },
+  {
+    "id": 1755281209112,
+    "type": "visual",
+    "contactId": "120363402832657373@g.us",
+    "contentId": "1755279118884",
+    "timestamp": "2025-08-15T18:06:49.112Z",
+    "status": "completed",
+    "sentAt": "2025-08-15T18:07:03.279Z"
+  },
+  {
+    "id": 1755281264197,
+    "type": "script",
+    "contactId": "120363422265060742@g.us",
+    "contentId": "1755279111718",
+    "timestamp": "2025-08-15T18:07:44.197Z",
+    "status": "completed",
+    "sentAt": "2025-08-15T18:08:02.959Z"
+  },
+  {
+    "id": 1755282406701,
+    "type": "script",
+    "contactId": "120363422265060742@g.us",
+    "contentId": "1755279111718",
+    "timestamp": "2025-08-15T18:26:46.701Z",
+    "status": "completed",
+    "sentAt": "2025-08-15T18:27:03.672Z"
+  },
+  {
+    "id": 1755298127407,
+    "type": "script",
+    "contactId": "120363402832657373@g.us",
+    "contentId": "1755298109604",
+    "timestamp": "2025-08-15T22:48:47.407Z",
+    "status": "completed",
+    "sentAt": "2025-08-15T22:49:03.528Z"
+  },
+  {
+    "id": 1755298140575,
+    "type": "visual",
+    "contactId": "120363422265060742@g.us",
+    "contentId": "1755298122758",
+    "timestamp": "2025-08-15T22:49:00.575Z",
+    "status": "completed",
+    "sentAt": "2025-08-15T22:49:03.944Z"
+  },
+  {
+    "id": 1755300555359,
+    "type": "script",
+    "contactId": "120363422265060742@g.us",
+    "contentId": "1755298109604",
+    "timestamp": "2025-08-15T23:29:15.359Z",
+    "status": "failed",
+    "error": "Cannot read properties of undefined (reading 'id')"
+  },
+  {
+    "id": 1755309664760,
+    "type": "visual",
+    "contactId": "120363402832657373@g.us",
+    "contentId": "1755309632666",
+    "timestamp": "2025-08-16T02:01:04.760Z",
+    "status": "completed",
+    "sentAt": "2025-08-16T02:01:06.463Z"
+  },
+  {
+    "id": 1755342444767,
+    "type": "script",
+    "contactId": "120363422265060742@g.us",
+    "contentId": "1755342364814",
+    "timestamp": "2025-08-16T11:07:24.767Z",
+    "status": "completed",
+    "sentAt": "2025-08-16T11:07:29.882Z"
+  },
+  {
+    "id": 1755371729110,
+    "type": "visual",
+    "contactId": "120363422265060742@g.us",
+    "contentId": "1755371706065",
+    "timestamp": "2025-08-16T19:15:29.110Z",
+    "status": "completed",
+    "sentAt": "2025-08-16T19:15:33.839Z"
+  },
+  {
+    "id": 1755371747998,
+    "type": "script",
+    "contactId": "120363402832657373@g.us",
+    "contentId": "1755371692718",
+    "timestamp": "2025-08-16T19:15:47.998Z",
+    "status": "completed",
+    "sentAt": "2025-08-16T19:15:48.731Z"
+  }
+]
